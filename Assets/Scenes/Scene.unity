@@ -246,6 +246,49 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &744493628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1417949461038080723, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+  m_PrefabInstance: {fileID: 7969684935687351567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &744493629 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5082439396694919568, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+  m_PrefabInstance: {fileID: 7969684935687351567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744493628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3478e20ab87c94391ba6f99268f1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Between.Player.PlayerMovement
+--- !u!114 &744493630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5965898125110741321, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+  m_PrefabInstance: {fileID: 7969684935687351567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744493628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960010ea5e73b60489aac16f3f3ddb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Between.PlayerLook
+--- !u!114 &744493634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744493628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d3157e2457d6040be04fe2510c9d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Between.Player.FirstPersonController
+  _canMove: 1
+  _canLook: 1
+  _playerMovement: {fileID: 744493629}
+  _playerLook: {fileID: 744493630}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +338,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1499623479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1499623480}
+  - component: {fileID: 1499623481}
+  m_Layer: 0
+  m_Name: Game Initiator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1499623480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499623479}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1499623481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499623479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2b3dbcc3c8f8848b66c4e1411df95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Between.Core.GameInitiator
+  _gameObjectsData: {fileID: 11400000, guid: 29f1bf5aff19cd54180fcba9112dd8dd, type: 2}
 --- !u!1 &1918384119
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +550,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1417949461038080723, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 744493634}
   m_SourcePrefab: {fileID: 100100000, guid: d184bde008593f341bed6e05249f6b70, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -472,3 +563,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1918384123}
   - {fileID: 7969684935687351567}
+  - {fileID: 1499623480}

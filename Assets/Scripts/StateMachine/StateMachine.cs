@@ -1,21 +1,22 @@
+using Between.Player;
 using System;
+using Void.StateMachines;
 
-namespace Void.StateMachines
+namespace Between.StateMachines
 {
-    // handles
     [Serializable]
     public class StateMachine
     {
         public IState CurrentState { get; private set; }
 
-        // reference to the state objects
+        private readonly GameplayState _gameplayState;
+        public GameplayState GameplayState => _gameplayState;
 
-        // event to notify other objects of the state change
         public event Action<IState> stateChanged;
 
-        // pass in necessary parameters into constructor 
-        public StateMachine()
+        public StateMachine(PlayerMovement player)
         {
+            _gameplayState = new GameplayState(player);
             // create an instance for each state and pass in PlayerController
         }
 
