@@ -18,24 +18,12 @@ namespace Between.Player
         [SerializeField]
         private Transform _cameraRoot;
 
-        private InputReader _input;
-
         private float _xRotation;
 
-        private void Awake()
+        public void Look(float inputX, float inputY)
         {
-            _input = GetComponent<InputReader>();
-        }
-
-        private void Update()
-        {
-            Look();
-        }
-
-        private void Look()
-        {
-            float mouseX = _input.LookInput.x * _mouseSensitivity * Time.deltaTime;
-            float mouseY = _input.LookInput.y * _mouseSensitivity * Time.deltaTime;
+            float mouseX = inputX * _mouseSensitivity * Time.deltaTime;
+            float mouseY = inputY * _mouseSensitivity * Time.deltaTime;
 
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, minLookAngle, maxLookAngle);

@@ -29,17 +29,13 @@ namespace Between.Player
         private bool _isGrounded;
 
         private CharacterController _controller;
-        private InputReader _input;
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<InputReader>();
-
-            _input.JumpEvent += HandleJump;
         }
 
-        private void Update()
+        public void HandleGravity()
         {
             _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
 
@@ -48,28 +44,25 @@ namespace Between.Player
                 _velocity.y = -2f;
             }
 
-            float moveX = _input.MoveInput.x;
-            float moveZ = _input.MoveInput.y;
-
-            Vector3 move = transform.right * moveX + transform.forward * moveZ;
-            _controller.Move(move * _moveSpeed * Time.deltaTime);
-
-            // Gravity
             _velocity.y += _gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
         }
 
-        private void HandleJump()
+        public void Move(float inputX, float inputY)
+        {
+            float moveX = inputX;
+            float moveZ = inputY;
+
+            Vector3 move = transform.right * moveX + transform.forward * moveZ;
+            _controller.Move(move * _moveSpeed * Time.deltaTime);
+        }
+
+        public void HandleJump()
         {
             if (_isGrounded)
             {
                 _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             }
-        }
-
-        private void OnDisable()
-        {
-            _input.JumpEvent -= HandleJump;
         }
     }
 }
