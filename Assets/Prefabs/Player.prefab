@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1194851329843111100}
   - component: {fileID: 5579180206032793234}
   - component: {fileID: 6480071831554629434}
+  - component: {fileID: 5451808839455117136}
   - component: {fileID: 5965898125110741321}
   - component: {fileID: 5082439396694919568}
   m_Layer: 0
@@ -75,6 +76,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401b11bbf8d44674790c403119ff79fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Between.Inputs.InputReader
+--- !u!114 &5451808839455117136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417949461038080723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d3157e2457d6040be04fe2510c9d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Between.Player.FirstPersonController
+  _canMove: 1
+  _canLook: 1
+  _playerMovement: {fileID: 5082439396694919568}
+  _playerLook: {fileID: 5965898125110741321}
 --- !u!114 &5965898125110741321
 MonoBehaviour:
   m_ObjectHideFlags: 0

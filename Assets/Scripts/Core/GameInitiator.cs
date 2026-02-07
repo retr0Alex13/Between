@@ -11,14 +11,10 @@ namespace Between.Core
         [SerializeField]
         private GameObjectsData _gameObjectsData;
 
-        private PlayerMovement _playerPrefab;
-
         private IEnumerator Start()
         {
-            _playerPrefab = _gameObjectsData.PlayerPrefab;
-
-            StateMachine stateMachine = new StateMachine(_playerPrefab);
-            stateMachine.Initialize(stateMachine.GameplayState);
+            StateMachine stateMachine = new StateMachine(_gameObjectsData);
+            stateMachine.Initialize(stateMachine.GamePreparationState);
 
             yield return null;
         }

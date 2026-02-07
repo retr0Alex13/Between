@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d180900ed314a91429f7db2c519aa965, type: 3}
   m_Name: GameObjectsData
   m_EditorClassIdentifier: Assembly-CSharp::Between.Data.GameObjectsData
-  _playerPrefab: {fileID: 5082439396694919568, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+  _playerPrefab: {fileID: 5451808839455117136, guid: d184bde008593f341bed6e05249f6b70, type: 3}
+  _levels:
+  - {fileID: 2784398137839275862, guid: e57db3dd98b1ca6468a7559ef5a251f8, type: 3}

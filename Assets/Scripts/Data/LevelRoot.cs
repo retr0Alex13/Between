@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Between.Data
@@ -7,5 +6,7 @@ namespace Between.Data
     {
         [SerializeField]
         private Transform _playerSpawnPoint;
+
+        public Transform PlayerSpawnPoint => _playerSpawnPoint;
     }
 }

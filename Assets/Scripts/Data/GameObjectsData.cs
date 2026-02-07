@@ -7,8 +7,13 @@ namespace Between.Data
     public class GameObjectsData : ScriptableObject
     {
         [SerializeField]
-        private PlayerMovement _playerPrefab;
+        private FirstPersonController _playerPrefab;
 
-        public PlayerMovement PlayerPrefab => _playerPrefab;
+        [SerializeField]
+        private LevelRoot[] _levels;
+
+        public LevelRoot[] Levels => _levels;
+
+        public FirstPersonController PlayerPrefab => _playerPrefab;
     }
 }

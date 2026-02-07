@@ -45,7 +45,7 @@ namespace Between.Player
             _input.JumpEvent -= _playerMovement.HandleJump;
         }
 
-        public void SetMovementAbility(bool canMove)
+        public void SetMoveAbility(bool canMove)
         {
             _canMove = canMove;
         }
