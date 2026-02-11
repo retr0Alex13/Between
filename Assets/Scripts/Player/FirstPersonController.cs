@@ -50,9 +50,14 @@ namespace Between.Player
             _canMove = canMove;
         }
 
-        public void SetLookAbility(bool canMove)
+        public void SetLookAbility(bool canLook)
         {
-            _canMove = canMove;
+            _canLook = canLook;
+        }
+
+        public float GetPlayerVelocity()
+        {
+            return _playerMovement.CharacterController.velocity.magnitude;
         }
     }
 }

@@ -30,6 +30,8 @@ namespace Between.Player
 
         private CharacterController _controller;
 
+        public CharacterController CharacterController => _controller;
+
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();

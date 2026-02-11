@@ -7,6 +7,10 @@ namespace Between.Data
         [SerializeField]
         private Transform _playerSpawnPoint;
 
+        [SerializeField]
+        private GameObject[] _ghostObjects;
+
+        public GameObject[] GhostObjects => _ghostObjects;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
     }
 }

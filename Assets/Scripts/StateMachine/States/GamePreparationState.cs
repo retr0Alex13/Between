@@ -35,7 +35,7 @@ namespace Between.StateMachines
             _playerInstance.SetMoveAbility(false);
 
             _gameContext.Player = _playerInstance;
-            _gameContext.CurrentLevel = _currentLevel;
+            _gameContext.CurrentLevelRoot = _currentLevel;
 
             _stateMachine.TransitionTo(_stateMachine.GameplayState);
         }

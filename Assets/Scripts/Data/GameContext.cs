@@ -6,6 +6,6 @@ namespace Between.Data
     {
         public FirstPersonController Player { get; set; }
 
-        public LevelRoot CurrentLevel { get; set; }
+        public LevelRoot CurrentLevelRoot { get; set; }
     }
 }
