@@ -14,17 +14,19 @@ namespace Between.StateMachines
 
         private LevelRoot _level;
         private FirstPersonController _player;
-        private GameObject[] _ghostObjects;
+        private GhostObject[] _ghostObjects;
 
         // Move to level config data later
         private float _waveDelay = 0.1f;
-        private float _fadeDuration = 1f;
-        private float _standingStillTime = 2f;
+        private float _fadeDuration = 0.5f;
+        private float _standingStillTime = 1f;
 
         private Coroutine _fadeOutCoroutine;
 
         private bool _isStandingStill = false;
         private float _timer;
+
+        private readonly int _alphaProperty = Shader.PropertyToID("_BaseColor");
 
         public GameplayState(StateMachine stateMachine, GameContext gameContext)
         {
@@ -38,12 +40,34 @@ namespace Between.StateMachines
             _player = _gameContext.Player;
             _ghostObjects = _level.GhostObjects;
 
+            foreach (GhostObject ghostObject in _ghostObjects)
+            {
+                ghostObject.OnPlayerWalkedThrough += RespwanPlayer;
+            }
+
+            Cursor.lockState = CursorLockMode.Locked;
             _player.SetMoveAbility(true);
             _player.SetLookAbility(true);
         }
 
         public void Execute()
         {
+            SetupGhostVision();
+        }
+
+        public void Exit()
+        {
+            foreach (GhostObject ghostObject in _ghostObjects)
+            {
+                ghostObject.OnPlayerWalkedThrough -= RespwanPlayer;
+            }
+        }
+
+        private void SetupGhostVision()
+        {
+            if (_ghostObjects.Length <= 0)
+                return;
+
             if (_player.GetPlayerVelocity() < 1f)
             {
                 if (_isStandingStill)
@@ -76,49 +100,38 @@ namespace Between.StateMachines
             }
         }
 
-        public void Exit()
-        {
-
-        }
-
         private IEnumerator StartWaveEffect(bool fromNearest, bool makeVisible)
         {
-            List<GameObject> sortedGhosts = new List<GameObject>(_ghostObjects);
+            List<GhostObject> sortedGhosts = new List<GhostObject>(_ghostObjects);
 
-            if (fromNearest)
+            sortedGhosts.Sort((a, b) =>
             {
-                sortedGhosts.Sort((a, b) =>
-                    Vector3.Distance(_player.transform.position, a.transform.position)
-                    .CompareTo(Vector3.Distance(_player.transform.position, b.transform.position))
-                    );
-            }
-            else
-            {
-                sortedGhosts.Sort((a, b) =>
-                    Vector3.Distance(_player.transform.position, b.transform.position)
-                    .CompareTo(Vector3.Distance(_player.transform.position, a.transform.position))
-                    );
-            }
+                float distA = Vector3.Distance(_player.transform.position, a.transform.position);
+                float distB = Vector3.Distance(_player.transform.position, b.transform.position);
+                return fromNearest ? distA.CompareTo(distB) : distB.CompareTo(distA);
+            });
 
-            foreach (GameObject ghost in sortedGhosts)
+            foreach (GhostObject ghost in sortedGhosts)
             {
-                if (makeVisible)
+                Renderer[] childRenderers = ghost.GetComponentsInChildren<Renderer>();
+
+                foreach (Renderer childRender in childRenderers)
                 {
-                    _level.StartCoroutine(FadeObject(ghost, 0f, 1f));
+                    _level.StartCoroutine(FadeObject(childRender.gameObject,
+                        makeVisible ? 0f : 0.1f,
+                        makeVisible ? 0.1f : 0f));
                 }
-                else
-                {
-                    _level.StartCoroutine(FadeObject(ghost, 1f, 0f));
-                }
+
                 yield return new WaitForSeconds(_waveDelay);
             }
+
         }
 
         private IEnumerator FadeObject(GameObject obj, float startAlpha, float endAlpha)
         {
-            Renderer renderer = obj.GetComponent<Renderer>();
-            Material mat = renderer.material;
+            if (!obj.TryGetComponent(out Renderer renderer)) yield break;
 
+            MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
             float elapsed = 0f;
 
             while (elapsed < _fadeDuration)
@@ -126,12 +139,26 @@ namespace Between.StateMachines
                 elapsed += Time.deltaTime;
                 float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _fadeDuration);
 
-                Color color = mat.color;
-                color.a = currentAlpha;
-                mat.color = color;
+                renderer.GetPropertyBlock(propBlock);
 
+                Color color = renderer.sharedMaterial.color;
+                color.a = currentAlpha;
+
+                propBlock.SetColor(_alphaProperty, color);
+                renderer.SetPropertyBlock(propBlock);
+                
                 yield return null;
             }
+        }
+
+        private void RespwanPlayer()
+        {
+            _player.GetComponent<CharacterController>().enabled = false;
+
+            _player.transform.position = _level.PlayerSpawnPoint.position;
+            _player.transform.rotation = _level.PlayerSpawnPoint.rotation;
+
+            _player.GetComponent<CharacterController>().enabled = true;
         }
     }
 }

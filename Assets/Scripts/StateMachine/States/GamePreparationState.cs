@@ -29,7 +29,7 @@ namespace Between.StateMachines
         public void Enter()
         {
             _currentLevel = Object.Instantiate(_levels[0]);
-            _playerInstance = Object.Instantiate(_player, _currentLevel.PlayerSpawnPoint.position, Quaternion.identity);
+            _playerInstance = Object.Instantiate(_player, _currentLevel.PlayerSpawnPoint.position, _currentLevel.PlayerSpawnPoint.rotation);
 
             _playerInstance.SetLookAbility(false);
             _playerInstance.SetMoveAbility(false);
