@@ -27,6 +27,7 @@ namespace Between.Player
 
         private Vector3 _velocity;
         private bool _isGrounded;
+        private bool _canJump;
 
         private CharacterController _controller;
 
@@ -61,10 +62,15 @@ namespace Between.Player
 
         public void HandleJump()
         {
-            if (_isGrounded)
+            if (_isGrounded && _canJump)
             {
                 _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
             }
+        }
+
+        public void SetCanJump(bool canJump)
+        {
+            _canJump = canJump;
         }
     }
 }

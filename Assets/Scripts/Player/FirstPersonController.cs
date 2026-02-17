@@ -12,6 +12,9 @@ namespace Between.Player
         private bool _canLook = true;
 
         [SerializeField]
+        private bool _canJump = true;
+
+        [SerializeField]
         private PlayerMovement _playerMovement;
 
         [SerializeField]
@@ -23,6 +26,11 @@ namespace Between.Player
         {
             _input = GetComponent<InputReader>();
             _input.JumpEvent += _playerMovement.HandleJump;
+        }
+
+        private void Start()
+        {
+            _playerMovement.SetCanJump(_canJump);
         }
 
         private void Update()
@@ -53,6 +61,12 @@ namespace Between.Player
         public void SetLookAbility(bool canLook)
         {
             _canLook = canLook;
+        }
+
+        public void SetJumpAbility(bool canJump)
+        {
+            _canJump = canJump;
+            _playerMovement.SetCanJump(canJump);
         }
 
         public float GetPlayerVelocity()
