@@ -11,11 +11,14 @@ namespace Between.Core
         [SerializeField]
         private GameObjectsData _gameObjectsData;
 
+        [SerializeField]
+        private GameConfigData _gameConfigData;
+
         private StateMachine _stateMachine;
 
         private IEnumerator Start()
         {
-            _stateMachine = new StateMachine(_gameObjectsData);
+            _stateMachine = new StateMachine(_gameObjectsData, _gameConfigData);
             _stateMachine.Initialize(_stateMachine.GamePreparationState);
 
             yield return null;

@@ -11,15 +11,11 @@ namespace Between.StateMachines
     {
         private readonly StateMachine _stateMachine;
         private readonly GameContext _gameContext;
+        private readonly GameConfigData _gameConfigData;
 
         private LevelRoot _level;
         private FirstPersonController _player;
         private GhostObject[] _ghostObjects;
-
-        // Move to level config data later
-        private float _waveDelay = 0.1f;
-        private float _fadeDuration = 0.5f;
-        private float _standingStillTime = 1f;
 
         private Coroutine _fadeOutCoroutine;
 
@@ -28,9 +24,10 @@ namespace Between.StateMachines
 
         private readonly int _alphaProperty = Shader.PropertyToID("_BaseColor");
 
-        public GameplayState(StateMachine stateMachine, GameContext gameContext)
+        public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, GameContext gameContext)
         {
             _stateMachine = stateMachine;
+            _gameConfigData = gameConfigData;
             _gameContext = gameContext;
         }
 
@@ -75,7 +72,7 @@ namespace Between.StateMachines
 
                 _timer += Time.deltaTime;
 
-                if (_timer >= _standingStillTime)
+                if (_timer >= _gameConfigData.StandingStillTime)
                 {
                     if (_fadeOutCoroutine != null)
                     {
@@ -122,7 +119,7 @@ namespace Between.StateMachines
                         makeVisible ? 0.1f : 0f));
                 }
 
-                yield return new WaitForSeconds(_waveDelay);
+                yield return new WaitForSeconds(_gameConfigData.WaveDelay);
             }
 
         }
@@ -134,10 +131,10 @@ namespace Between.StateMachines
             MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
             float elapsed = 0f;
 
-            while (elapsed < _fadeDuration)
+            while (elapsed < _gameConfigData.FadeDuration)
             {
                 elapsed += Time.deltaTime;
-                float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _fadeDuration);
+                float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _gameConfigData.FadeDuration);
 
                 renderer.GetPropertyBlock(propBlock);
 
