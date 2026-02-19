@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Between.Player.FirstPersonController
   _canMove: 1
   _canLook: 1
+  _canJump: 0
   _playerMovement: {fileID: 5082439396694919568}
   _playerLook: {fileID: 5965898125110741321}
 --- !u!114 &5965898125110741321
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960010ea5e73b60489aac16f3f3ddb09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Between.PlayerLook
-  _mouseSensitivity: 20
+  _mouseSensitivity: 10
   maxLookAngle: 90
   minLookAngle: -90
   _cameraRoot: {fileID: 2608836414708673140}
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3478e20ab87c94391ba6f99268f1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Between.Player.PlayerMovement
-  _moveSpeed: 10
+  _moveSpeed: 5
   _gravity: -39.24
   _groundRadius: 0.4
   _jumpHeight: 3
