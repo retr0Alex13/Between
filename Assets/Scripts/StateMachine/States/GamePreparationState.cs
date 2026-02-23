@@ -28,26 +28,40 @@ namespace Between.StateMachines
 
         public void Enter()
         {
-            _currentLevel = Object.Instantiate(_levels[0]);
-            _playerInstance = Object.Instantiate(_player, _currentLevel.PlayerSpawnPoint.position, _currentLevel.PlayerSpawnPoint.rotation);
+            int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
 
-            _playerInstance.SetLookAbility(false);
-            _playerInstance.SetMoveAbility(false);
+            if (currentLevelIndex > _levels.Length - 1)
+            {
+                currentLevelIndex = Random.Range(0, _levels.Length - 1);
+            }
 
-            _gameContext.Player = _playerInstance;
+            _currentLevel = Object.Instantiate(_levels[currentLevelIndex]);
+
+            if (_playerInstance == null)
+            {
+                _playerInstance = Object.Instantiate(_player, _currentLevel.PlayerSpawnPoint.position, _currentLevel.PlayerSpawnPoint.rotation);
+
+                _playerInstance.SetLookAbility(false);
+                _playerInstance.SetMoveAbility(false);
+
+                _gameContext.Player = _playerInstance;
+            }
+            else
+            {
+                _gameContext.Player.SetLookAbility(false);
+                _gameContext.Player.SetMoveAbility(false);
+
+                CharacterController player = _playerInstance.GetComponent<CharacterController>();
+                player.enabled = false;
+
+                _playerInstance.transform.position = _currentLevel.PlayerSpawnPoint.position;
+                _playerInstance.transform.rotation = _currentLevel.PlayerSpawnPoint.rotation;
+
+                player.enabled = true;
+            }
+
             _gameContext.CurrentLevelRoot = _currentLevel;
-
             _stateMachine.TransitionTo(_stateMachine.GameplayState);
-        }
-
-        public void Execute()
-        {
-
-        }
-
-        public void Exit()
-        {
-
         }
     }
 }

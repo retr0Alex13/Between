@@ -42,6 +42,8 @@ namespace Between.StateMachines
                 ghostObject.OnPlayerWalkedThrough += RespwanPlayer;
             }
 
+            _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
+
             Cursor.lockState = CursorLockMode.Locked;
             _player.SetMoveAbility(true);
             _player.SetLookAbility(true);
@@ -54,10 +56,17 @@ namespace Between.StateMachines
 
         public void Exit()
         {
+            _level.LevelFinish.OnPlayerReachedFinish -= OnFinishReached;
+
+            _player.SetMoveAbility(false);
+            _player.SetLookAbility(false);
+
             foreach (GhostObject ghostObject in _ghostObjects)
             {
                 ghostObject.OnPlayerWalkedThrough -= RespwanPlayer;
             }
+
+            Object.Destroy(_level.gameObject);
         }
 
         private void SetupGhostVision()
@@ -150,12 +159,22 @@ namespace Between.StateMachines
 
         private void RespwanPlayer()
         {
-            _player.GetComponent<CharacterController>().enabled = false;
+            CharacterController player = _gameContext.Player.GetComponent<CharacterController>();
+
+            player.enabled = false;
 
             _player.transform.position = _level.PlayerSpawnPoint.position;
             _player.transform.rotation = _level.PlayerSpawnPoint.rotation;
 
-            _player.GetComponent<CharacterController>().enabled = true;
+            player.enabled = true;
+        }
+
+        private void OnFinishReached()
+        {
+            int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
+            PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, currentLevelIndex + 1);
+
+            _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
         }
     }
 }

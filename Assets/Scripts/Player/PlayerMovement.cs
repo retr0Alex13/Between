@@ -40,6 +40,8 @@ namespace Between.Player
 
         public void HandleGravity()
         {
+            if (!_controller.enabled) return;
+
             _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
 
             if (_isGrounded && _velocity.y < 0)
@@ -53,6 +55,8 @@ namespace Between.Player
 
         public void Move(float inputX, float inputY)
         {
+            if (!_controller.enabled) return;
+
             float moveX = inputX;
             float moveZ = inputY;
 

@@ -10,7 +10,11 @@ namespace Between.Data
         [SerializeField]
         private GhostObject[] _ghostObjects;
 
+        [SerializeField]
+        private LevelFinishTrigger _levelFinish;
+
         public GhostObject[] GhostObjects => _ghostObjects;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
+        public LevelFinishTrigger LevelFinish => _levelFinish;
     }
 }
