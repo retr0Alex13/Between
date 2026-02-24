@@ -1,6 +1,6 @@
 using Between.Player;
 
-namespace Between.Data
+namespace Between.Level
 {
     public class GameContext
     {

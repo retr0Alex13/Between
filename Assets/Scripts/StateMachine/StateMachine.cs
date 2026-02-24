@@ -1,7 +1,7 @@
 using Between.Data;
-using Between.Player;
+using Between.Level;
+using Between.View;
 using System;
-using Void.StateMachines;
 
 namespace Between.StateMachines
 {
@@ -20,7 +20,7 @@ namespace Between.StateMachines
 
         public event Action<IState> stateChanged;
 
-        public StateMachine(GameObjectsData gameObjectsData, GameConfigData gameConfigData)
+        public StateMachine(ViewManager viewManager, ViewPrefabsData viewPrefabsData, GameObjectsData gameObjectsData, GameConfigData gameConfigData)
         {
             _gameContext = new GameContext();
 
@@ -28,28 +28,23 @@ namespace Between.StateMachines
             _gameplayState = new GameplayState(this,gameConfigData, _gameContext);
         }
 
-        // set the starting state
         public void Initialize(IState state)
         {
             CurrentState = state;
             state.Enter();
 
-            // notify other objects that state has changed
             stateChanged?.Invoke(state);
         }
 
-        // exit this state and enter another
         public void TransitionTo(IState nextState)
         {
             CurrentState.Exit();
             CurrentState = nextState;
             nextState.Enter();
 
-            // notify other objects that state has changed
             stateChanged?.Invoke(nextState);
         }
 
-        // allow the StateMachine to update this state
         public void Execute()
         {
             if (CurrentState != null)

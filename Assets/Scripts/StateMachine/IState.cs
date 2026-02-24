@@ -1,4 +1,4 @@
-namespace Void.StateMachines
+namespace Between.StateMachines
 {
     public interface IState
     {

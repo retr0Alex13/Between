@@ -2,7 +2,7 @@ using Between.Player;
 using System;
 using UnityEngine;
 
-namespace Between
+namespace Between.Level
 {
     public class LevelFinishTrigger : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Between.Data
+namespace Between.Level
 {
     public class LevelRoot : MonoBehaviour
     {
