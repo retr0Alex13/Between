@@ -1,6 +1,7 @@
 using Between.Data;
 using Between.Level;
 using Between.Player;
+using Between.View;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,15 @@ namespace Between.StateMachines
     {
         private readonly StateMachine _stateMachine;
         private readonly GameContext _gameContext;
+        private readonly ViewManager _viewManager;
+        private readonly ViewPrefabsData _viewPrefabsData;
         private readonly GameConfigData _gameConfigData;
 
         private LevelRoot _level;
         private FirstPersonController _player;
         private GhostObject[] _ghostObjects;
 
+        private GameplayView _gameplayView;
         private Coroutine _fadeOutCoroutine;
 
         private bool _isStandingStill = false;
@@ -24,15 +28,21 @@ namespace Between.StateMachines
 
         private readonly int _alphaProperty = Shader.PropertyToID("_BaseColor");
 
-        public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, GameContext gameContext)
+        public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, ViewPrefabsData viewPrefabsData,
+            ViewManager viewManager, GameContext gameContext)
         {
             _stateMachine = stateMachine;
             _gameConfigData = gameConfigData;
+            _viewManager = viewManager;
+            _viewPrefabsData = viewPrefabsData;
             _gameContext = gameContext;
         }
 
         public void Enter()
         {
+            _gameplayView = _viewManager.CreateView(_viewPrefabsData.GameplayView);
+            _gameplayView.Show();
+
             _level = _gameContext.CurrentLevelRoot;
             _player = _gameContext.Player;
             _ghostObjects = _level.GhostObjects;
@@ -66,6 +76,9 @@ namespace Between.StateMachines
                 ghostObject.OnPlayerWalkedThrough -= RespwanPlayer;
             }
 
+            _viewManager.DestroyView(_viewPrefabsData.GameplayView);
+            _gameplayView = null;
+
             Object.Destroy(_level.gameObject);
         }
 
@@ -80,6 +93,9 @@ namespace Between.StateMachines
                     return;
 
                 _timer += Time.deltaTime;
+
+                float fillProgress = 1f - Mathf.Clamp01(_timer / _gameConfigData.StandingStillTime);
+                _gameplayView.SetEyeFillAmount(fillProgress);
 
                 if (_timer >= _gameConfigData.StandingStillTime)
                 {
@@ -98,6 +114,8 @@ namespace Between.StateMachines
             {
                 _isStandingStill = false;
                 _timer = 0f;
+
+                _gameplayView.SetEyeFillAmount(1f);
 
                 if (_fadeOutCoroutine != null)
                     return;

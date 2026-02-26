@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0a2725357ab414e99cc007a73d1e2b, type: 3}
   m_Name: ViewPrefabsData
   m_EditorClassIdentifier: Assembly-CSharp::Between.Data.ViewPrefabsData
+  _gameplayView: {fileID: 5763329707034129336, guid: 6438d13c767dbcf4c8eade755dd8e415, type: 3}

@@ -565,7 +565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Between.Core.GameInitiator
   _gameObjectsData: {fileID: 11400000, guid: 29f1bf5aff19cd54180fcba9112dd8dd, type: 2}
+  _viewPrefabsData: {fileID: 11400000, guid: c55a48e93ceda7241a8b9b2a3c571e91, type: 2}
   _gameConfigData: {fileID: 11400000, guid: 88e8daff827f81e4e9c310a29c230838, type: 2}
+  _viewManager: {fileID: 1165903306}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

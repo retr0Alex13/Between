@@ -25,7 +25,7 @@ namespace Between.StateMachines
             _gameContext = new GameContext();
 
             _gamePreparationState = new GamePreparationState(this, gameObjectsData, _gameContext);
-            _gameplayState = new GameplayState(this,gameConfigData, _gameContext);
+            _gameplayState = new GameplayState(this, gameConfigData, viewPrefabsData, viewManager, _gameContext);
         }
 
         public void Initialize(IState state)
