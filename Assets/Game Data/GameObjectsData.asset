@@ -15,3 +15,4 @@ MonoBehaviour:
   _playerPrefab: {fileID: 5451808839455117136, guid: d184bde008593f341bed6e05249f6b70, type: 3}
   _levels:
   - {fileID: 2784398137839275862, guid: e57db3dd98b1ca6468a7559ef5a251f8, type: 3}
+  - {fileID: 2784398137839275862, guid: 795532cc141011d4eb3dfafa50c598ea, type: 3}
