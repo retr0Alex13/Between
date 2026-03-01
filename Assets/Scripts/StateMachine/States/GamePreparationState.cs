@@ -29,10 +29,14 @@ namespace Between.StateMachines
         public void Enter()
         {
             int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
+            Debug.Log($"Loading level with index: {currentLevelIndex}");
 
             if (currentLevelIndex > _levels.Length - 1)
             {
+                PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, 0);
+
                 currentLevelIndex = Random.Range(0, _levels.Length - 1);
+                Debug.LogWarning($"Current level index is out of bounds. Loading random level with index: {currentLevelIndex}");
             }
 
             _currentLevel = Object.Instantiate(_levels[currentLevelIndex]);
