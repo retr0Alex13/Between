@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: D_Halloween_GraveHands
-  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: fe9b8d0cd2ed3534ba1bb2eaede52204, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,15 +29,22 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Albedo_Map:
+        m_Texture: {fileID: 2800000, guid: 073249ac9c4912c46b30e7de47d733ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Noise_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 073249ac9c4912c46b30e7de47d733ba, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -96,6 +103,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Bottom_Cutout: 0
+    - Bottom_Cutout_Smoothness: 0
+    - Fresnel_Intensity: 0.5
+    - Noise_Intensity: 1.15
+    - Noise_Invert: 0
+    - Noise_Tiling: 1
+    - Noise_Vertical_Mask: 0
+    - Noise_Vertical_Mask_Smoothness: 0
+    - Tint_Intensity: 3
+    - Transparency_Intensity: 1
+    - Triplanar_Blend_Sharpness: 2
+    - Use_Albedo_Map_Alpha: 0
+    - Vertical_Transparency_Control: 0
+    - Vertical_Transparency_Smoothness: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -119,6 +140,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SampleGI: 0
@@ -133,6 +155,11 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
+    - Fresnel_Color: {r: 2, g: 2, b: 2, a: 0}
+    - Noise_Emission_Color: {r: 2, g: 2, b: 2, a: 0}
+    - Noise_XY_Offset_Direction: {r: 0, g: 0.1, b: 0, a: 0}
+    - Noise_YZ_Offset_Direction: {r: 0, g: 0.1, b: 0, a: 0}
+    - Tint_Color: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
