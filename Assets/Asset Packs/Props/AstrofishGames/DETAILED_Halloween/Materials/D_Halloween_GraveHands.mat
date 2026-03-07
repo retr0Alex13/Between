@@ -105,7 +105,7 @@ Material:
     m_Floats:
     - Bottom_Cutout: 0
     - Bottom_Cutout_Smoothness: 0
-    - Fresnel_Intensity: 0.5
+    - Fresnel_Intensity: 0
     - Noise_Intensity: 1.15
     - Noise_Invert: 0
     - Noise_Tiling: 1
