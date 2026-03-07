@@ -26,7 +26,7 @@ namespace Between.StateMachines
         private bool _isStandingStill = false;
         private float _timer;
 
-        private readonly int _alphaProperty = Shader.PropertyToID("_BaseColor");
+        private readonly int _alphaProperty = Shader.PropertyToID("Transparency_Intensity");
 
         public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, ViewPrefabsData viewPrefabsData,
             ViewManager viewManager, GameContext gameContext)
@@ -126,6 +126,8 @@ namespace Between.StateMachines
 
         private IEnumerator StartWaveEffect(bool fromNearest, bool makeVisible)
         {
+            float trasparencyAmount = 1f;
+
             List<GhostObject> sortedGhosts = new List<GhostObject>(_ghostObjects);
 
             sortedGhosts.Sort((a, b) =>
@@ -142,8 +144,8 @@ namespace Between.StateMachines
                 foreach (Renderer childRender in childRenderers)
                 {
                     _level.StartCoroutine(FadeObject(childRender.gameObject,
-                        makeVisible ? 0f : 0.1f,
-                        makeVisible ? 0.1f : 0f));
+                        makeVisible ? 0f : trasparencyAmount,
+                        makeVisible ? trasparencyAmount : 0f));
                 }
 
                 yield return new WaitForSeconds(_gameConfigData.WaveDelay);
@@ -164,13 +166,9 @@ namespace Between.StateMachines
                 float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _gameConfigData.FadeDuration);
 
                 renderer.GetPropertyBlock(propBlock);
-
-                Color color = renderer.sharedMaterial.color;
-                color.a = currentAlpha;
-
-                propBlock.SetColor(_alphaProperty, color);
+                propBlock.SetFloat(_alphaProperty, currentAlpha);
                 renderer.SetPropertyBlock(propBlock);
-                
+
                 yield return null;
             }
         }
