@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2874275506561943878
+--- !u!114 &-4196798946668366145
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,37 +20,33 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: D_Halloween_MudGraveGhost
-  m_Shader: {fileID: -6465566751694194690, guid: fe9b8d0cd2ed3534ba1bb2eaede52204, type: 3}
+  m_Name: Head_01
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _METALLICSPECGLOSSMAP
+  - _NORMALMAP
+  m_InvalidKeywords:
+  - _METALLICGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Albedo_Map:
-        m_Texture: {fileID: 2800000, guid: 48fd1a12b255836458efc33141ccd1e9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Noise_Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 48fd1a12b255836458efc33141ccd1e9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6553cd34553fde548b6057a6ea17423e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 0bbc79d15f89cf44a95dd3df31fbfde8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5c48cae2dfc062b4c9b4ba8cc7d61e96, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -70,15 +66,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 48fd1a12b255836458efc33141ccd1e9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6553cd34553fde548b6057a6ea17423e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: a46d1c44f9a372247ac9a0e9b818c537, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4bbd9df8fb09f8448918d2086d20ba1e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: a46d1c44f9a372247ac9a0e9b818c537, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -103,26 +99,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Bottom_Cutout: 0
-    - Bottom_Cutout_Smoothness: 0
-    - Fresnel_Intensity: 1.4
-    - Noise_Intensity: 1.15
-    - Noise_Invert: 0
-    - Noise_Tiling: 1
-    - Noise_Vertical_Mask: 0
-    - Noise_Vertical_Mask_Smoothness: 0
-    - Tint_Intensity: 3
-    - Transparency_Intensity: 1
-    - Triplanar_Blend_Sharpness: 2
-    - Use_Albedo_Map_Alpha: 0
-    - Vertical_Transparency_Control: 0
-    - Vertical_Transparency_Smoothness: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BlendOp: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -133,18 +114,16 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SampleGI: 0
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -155,11 +134,6 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
-    - Fresnel_Color: {r: 2, g: 2, b: 2, a: 0}
-    - Noise_Emission_Color: {r: 2, g: 2, b: 2, a: 0}
-    - Noise_XY_Offset_Direction: {r: 0, g: 0.1, b: 0, a: 0}
-    - Noise_YZ_Offset_Direction: {r: 0, g: 0.1, b: 0, a: 0}
-    - Tint_Color: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
