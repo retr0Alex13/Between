@@ -2097,6 +2097,7 @@ GameObject:
   - component: {fileID: 4761013060024777069}
   - component: {fileID: 515155856045880799}
   - component: {fileID: 758556108059910907}
+  - component: {fileID: 4096769496849970532}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -2142,7 +2143,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2.6
   m_Direction: 1
-  m_Center: {x: 0.05, y: 1.2, z: 0.05}
+  m_Center: {x: -0.04, y: 1.2, z: -0.06}
 --- !u!114 &515155856045880799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,6 +2172,20 @@ MonoBehaviour:
   _speed: 3
   _damping: 4
   _arrivalDistance: 0.001
+--- !u!114 &4096769496849970532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9217440195925101350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662d6416957219044824634c9a8a68b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::GhostAnimationController
+  _walkingGhost: 1
+  _animator: {fileID: 388905174948820756}
 --- !u!1 &9219433845976443418
 GameObject:
   m_ObjectHideFlags: 0
