@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5451808839455117136}
   - component: {fileID: 5965898125110741321}
   - component: {fileID: 5082439396694919568}
+  - component: {fileID: 3064975193676856980}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -129,6 +130,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _groundCheck: {fileID: 7468898061913996430}
+--- !u!114 &3064975193676856980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417949461038080723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865964f903355904a8026aa85ed343d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Between.Player.FootstepPlayer
+  _footSteps:
+  - {fileID: 8300000, guid: 35ba5f16d3049644baccfa54be6693b0, type: 3}
+  - {fileID: 8300000, guid: 1f6488a0dad803a47af7ef2ca10aca75, type: 3}
+  - {fileID: 8300000, guid: 23366d0e650b90f4e944ae3398f3f8fd, type: 3}
+  - {fileID: 8300000, guid: c01f8a4d77eed9643ba01050325466ee, type: 3}
+  - {fileID: 8300000, guid: fc091e987593d2e46961af0f1394c748, type: 3}
+  - {fileID: 8300000, guid: 0b18e56293d83194984ada6f80b62084, type: 3}
+  - {fileID: 8300000, guid: 2e978c14ae016aa41a64f03aaf2d8593, type: 3}
+  - {fileID: 8300000, guid: ecf27f163bf74614e979e4c2b595ef49, type: 3}
+  - {fileID: 8300000, guid: 96a53ce6bf6e0ba428505b0b09d804f0, type: 3}
+  - {fileID: 8300000, guid: 16646ae000ca4c046b13a8046a5a0963, type: 3}
+  _player: {fileID: 5451808839455117136}
+  _footstepTime: 0.4
 --- !u!1 &1960901896734570636
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5174678456782493888
 Transform:
   m_ObjectHideFlags: 0

@@ -1,10 +1,14 @@
 using Between.Inputs;
+using System;
 using UnityEngine;
 
 namespace Between.Player
 {
     public class FirstPersonController : MonoBehaviour
     {
+        public event Action OnPlayerWalk;
+        public event Action OnPlayerStop;
+
         [SerializeField]
         private bool _canMove = true;
 
@@ -19,6 +23,8 @@ namespace Between.Player
 
         [SerializeField]
         private PlayerLook _playerLook;
+
+        private bool _isMoving;
 
         private InputReader _input;
 
@@ -40,6 +46,19 @@ namespace Between.Player
             if (_canMove)
             {
                 _playerMovement.Move(_input.MoveInput.x, _input.MoveInput.y);
+            }
+
+            bool isCurrentlyMoving = GetPlayerVelocity() >= 0.1f;
+
+            if (isCurrentlyMoving)
+            {
+                _isMoving = true;
+                OnPlayerWalk?.Invoke();
+            }
+            else if (!isCurrentlyMoving && _isMoving)
+            {
+                _isMoving= false;
+                OnPlayerStop?.Invoke();
             }
 
             if (_canLook)
