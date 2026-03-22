@@ -57,7 +57,7 @@ namespace Between.Player
             }
             else if (!isCurrentlyMoving && _isMoving)
             {
-                _isMoving= false;
+                _isMoving = false;
                 OnPlayerStop?.Invoke();
             }
 

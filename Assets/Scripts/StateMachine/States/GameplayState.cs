@@ -54,6 +54,8 @@ namespace Between.StateMachines
 
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
 
+            _level.StartCoroutine(StartWaveEffect(true, false));
+
             Cursor.lockState = CursorLockMode.Locked;
             _player.SetMoveAbility(true);
             _player.SetLookAbility(true);
