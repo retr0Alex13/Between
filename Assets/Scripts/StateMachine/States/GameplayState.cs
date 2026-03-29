@@ -59,6 +59,8 @@ namespace Between.StateMachines
             Cursor.lockState = CursorLockMode.Locked;
             _player.SetMoveAbility(true);
             _player.SetLookAbility(true);
+
+            PokiUnitySDK.Instance.gameplayStart();
         }
 
         public void Execute()
@@ -192,6 +194,7 @@ namespace Between.StateMachines
             int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
             PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, currentLevelIndex + 1);
 
+            PokiUnitySDK.Instance.gameplayStop();
             _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
         }
     }
