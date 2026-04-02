@@ -26,6 +26,8 @@ namespace Between.StateMachines
         private bool _isStandingStill = false;
         private float _timer;
 
+        private bool _hasPokiGameplayStarted;
+
         private readonly int _alphaProperty = Shader.PropertyToID("Transparency_Intensity");
 
         public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, ViewPrefabsData viewPrefabsData,
@@ -53,14 +55,13 @@ namespace Between.StateMachines
             }
 
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
+            _player.OnPlayerWalk += OnPlayerWalked;
 
             _level.StartCoroutine(StartWaveEffect(true, false));
 
             Cursor.lockState = CursorLockMode.Locked;
             _player.SetMoveAbility(true);
             _player.SetLookAbility(true);
-
-            PokiUnitySDK.Instance.gameplayStart();
         }
 
         public void Execute()
@@ -71,6 +72,7 @@ namespace Between.StateMachines
         public void Exit()
         {
             _level.LevelFinish.OnPlayerReachedFinish -= OnFinishReached;
+            _player.OnPlayerWalk -= OnPlayerWalked;
 
             _player.SetMoveAbility(false);
             _player.SetLookAbility(false);
@@ -84,6 +86,15 @@ namespace Between.StateMachines
             _gameplayView = null;
 
             Object.Destroy(_level.gameObject);
+        }
+
+        private void OnPlayerWalked()
+        {
+            if (!_hasPokiGameplayStarted)
+            {
+                PokiUnitySDK.Instance.gameplayStart();
+                _hasPokiGameplayStarted = true;
+            }
         }
 
         private void SetupGhostVision()
