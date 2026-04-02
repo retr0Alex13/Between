@@ -22,8 +22,8 @@ namespace Between.Player
 
         public void Look(float inputX, float inputY)
         {
-            float mouseX = inputX * _mouseSensitivity * Time.deltaTime;
-            float mouseY = inputY * _mouseSensitivity * Time.deltaTime;
+            float mouseX = inputX * _mouseSensitivity;
+            float mouseY = inputY * _mouseSensitivity;
 
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, minLookAngle, maxLookAngle);
