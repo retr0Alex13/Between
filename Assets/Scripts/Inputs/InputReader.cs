@@ -10,7 +10,6 @@ namespace Between.Inputs
         public Vector2 MoveInput => _moveInput;
 
         public event Action JumpEvent;
-        public event Action TutorialButtonEvent;
 
         private Vector2 _lookInput;
         private Vector2 _moveInput;
@@ -23,12 +22,6 @@ namespace Between.Inputs
             _inputs.Enable();
 
             _inputs.Player.Jump.performed += OnJumpButtonPressed;
-            _inputs.Player.TutorialClose.performed += OnTutorialButtonPressed;
-        }
-
-        private void OnTutorialButtonPressed(InputAction.CallbackContext obj)
-        {
-            TutorialButtonEvent?.Invoke();
         }
 
         private void Update()

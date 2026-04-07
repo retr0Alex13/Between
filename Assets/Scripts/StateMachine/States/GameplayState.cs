@@ -57,18 +57,8 @@ namespace Between.StateMachines
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
             _player.OnPlayerWalk += OnPlayerWalked;
 
-            var isFirstTimePlay = PlayerPrefs.GetInt(Constants.FIRST_TIME_PLAYER_KEY, 1) == 1 ? true : false;
-
-            if (isFirstTimePlay)
-            {
-                Time.timeScale = 0f;
-                _gameplayView.ToggleTutorialPanel(true);
-                _player.OnTutorialButtonPressed += CloseTutorialPanel;
-            }
-            else
-            {
-                InitializePlayerControls();
-            }
+            //var isFirstTimePlay = PlayerPrefs.GetInt(Constants.FIRST_TIME_PLAYER_KEY, 1) == 1 ? true : false;
+            InitializePlayerControls();
         }
 
         private void InitializePlayerControls()
@@ -223,18 +213,6 @@ namespace Between.StateMachines
 
             PokiUnitySDK.Instance.gameplayStop();
             _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
-        }
-
-        private void CloseTutorialPanel()
-        {
-            InitializePlayerControls();
-
-            Time.timeScale = 1f;
-
-            _gameplayView.ToggleTutorialPanel(false);
-            _player.OnTutorialButtonPressed -= CloseTutorialPanel;
-
-            PlayerPrefs.SetInt(Constants.FIRST_TIME_PLAYER_KEY, 0);
         }
     }
 }
