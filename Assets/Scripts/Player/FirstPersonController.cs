@@ -8,6 +8,7 @@ namespace Between.Player
     {
         public event Action OnPlayerWalk;
         public event Action OnPlayerStop;
+        public event Action OnTutorialButtonPressed;
 
         [SerializeField]
         private bool _canMove = true;
@@ -32,6 +33,7 @@ namespace Between.Player
         {
             _input = GetComponent<InputReader>();
             _input.JumpEvent += _playerMovement.HandleJump;
+            _input.TutorialButtonEvent += OnTutorialButtonEvent;
         }
 
         private void Start()
@@ -91,6 +93,11 @@ namespace Between.Player
         public float GetPlayerVelocity()
         {
             return _playerMovement.CharacterController.velocity.magnitude;
+        }
+
+        private void OnTutorialButtonEvent()
+        {
+            OnTutorialButtonPressed?.Invoke();
         }
     }
 }

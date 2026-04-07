@@ -120,6 +120,15 @@ namespace Between.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TutorialClose"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2f012b5-f735-4b07-85b8-7443ecc90e69"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -199,6 +208,17 @@ namespace Between.Inputs
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52fefc4e-55da-4030-8938-f0b61178fe6d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -210,6 +230,7 @@ namespace Between.Inputs
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_TutorialClose = m_Player.FindAction("TutorialClose", throwIfNotFound: true);
         }
 
         ~@InputActions()
@@ -293,6 +314,7 @@ namespace Between.Inputs
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_TutorialClose;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -316,6 +338,10 @@ namespace Between.Inputs
             /// Provides access to the underlying input action "Player/Jump".
             /// </summary>
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/TutorialClose".
+            /// </summary>
+            public InputAction @TutorialClose => m_Wrapper.m_Player_TutorialClose;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -351,6 +377,9 @@ namespace Between.Inputs
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @TutorialClose.started += instance.OnTutorialClose;
+                @TutorialClose.performed += instance.OnTutorialClose;
+                @TutorialClose.canceled += instance.OnTutorialClose;
             }
 
             /// <summary>
@@ -371,6 +400,9 @@ namespace Between.Inputs
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @TutorialClose.started -= instance.OnTutorialClose;
+                @TutorialClose.performed -= instance.OnTutorialClose;
+                @TutorialClose.canceled -= instance.OnTutorialClose;
             }
 
             /// <summary>
@@ -432,6 +464,13 @@ namespace Between.Inputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnJump(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "TutorialClose" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTutorialClose(InputAction.CallbackContext context);
         }
     }
 }
