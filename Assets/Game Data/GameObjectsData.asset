@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Between.Data.GameObjectsData
   _playerPrefab: {fileID: 5451808839455117136, guid: d184bde008593f341bed6e05249f6b70, type: 3}
   _levels:
-  - {fileID: 2784398137839275862, guid: e57db3dd98b1ca6468a7559ef5a251f8, type: 3}
-  - {fileID: 2784398137839275862, guid: 795532cc141011d4eb3dfafa50c598ea, type: 3}
+  - {fileID: 2784398137839275862, guid: 41bc4c03a2039d34f8526d76e3d54064, type: 3}
+  - {fileID: 2784398137839275862, guid: bc2dc4e1a5a529443857b73d31cec48f, type: 3}

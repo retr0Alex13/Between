@@ -20,11 +20,12 @@ namespace Between.StateMachines
 
         public event Action<IState> stateChanged;
 
-        public StateMachine(ViewManager viewManager, ViewPrefabsData viewPrefabsData, GameObjectsData gameObjectsData, GameConfigData gameConfigData)
+        public StateMachine(ViewManager viewManager, ViewPrefabsData viewPrefabsData, GameObjectsData gameObjectsData,
+            GameConfigData gameConfigData, GameAudioData gameAudioData)
         {
             _gameContext = new GameContext();
 
-            _gamePreparationState = new GamePreparationState(this, gameObjectsData, _gameContext);
+            _gamePreparationState = new GamePreparationState(this, gameObjectsData, gameAudioData, _gameContext);
             _gameplayState = new GameplayState(this, gameConfigData, viewPrefabsData, viewManager, _gameContext);
         }
 

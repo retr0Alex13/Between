@@ -5,13 +5,13 @@ namespace Between.Player
     public class FootstepPlayer : MonoBehaviour
     {
         [SerializeField]
-        private AudioClip[] _footSteps;
-
-        [SerializeField]
         private FirstPersonController _player;
 
         [SerializeField]
         private float _footstepTime;
+
+        private AudioClip[] _footSteps;
+
         private float _timer;
 
         private void Start()
@@ -35,6 +35,11 @@ namespace Between.Player
         private void OnPlayerStop()
         {
             Debug.Log("Player Stopped");
+        }
+
+        public void SetFootstepsAudio(AudioClip[] footstepsClips)
+        {
+            _footSteps = footstepsClips;
         }
     }
 }

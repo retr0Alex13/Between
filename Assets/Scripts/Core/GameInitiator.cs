@@ -18,15 +18,19 @@ namespace Between.Core
         private GameConfigData _gameConfigData;
 
         [SerializeField]
+        private GameAudioData _gameAudioData;
+
+        [SerializeField]
         private ViewManager _viewManager;
 
         private StateMachine _stateMachine;
 
         private IEnumerator Start()
         {
-            _stateMachine = new StateMachine(_viewManager, _viewPrefabsData, _gameObjectsData, _gameConfigData);
+            _stateMachine = new StateMachine(_viewManager, _viewPrefabsData, _gameObjectsData, _gameConfigData, _gameAudioData);
             _stateMachine.Initialize(_stateMachine.GamePreparationState);
 
+            AudioManager.Instance.PlayMusic(_gameAudioData.SpookyGameplayMusic, 0.5f);
             yield return null;
         }
 

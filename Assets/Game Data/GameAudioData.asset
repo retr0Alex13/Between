@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b055b9d0109a064388fc5a4e6682886, type: 3}
+  m_Name: GameAudioData
+  m_EditorClassIdentifier: Core::Between.Data.GameAudioData
+  _footstepAudioClips:
+  - {fileID: 8300000, guid: 35ba5f16d3049644baccfa54be6693b0, type: 3}
+  - {fileID: 8300000, guid: 1f6488a0dad803a47af7ef2ca10aca75, type: 3}
+  - {fileID: 8300000, guid: 23366d0e650b90f4e944ae3398f3f8fd, type: 3}
+  - {fileID: 8300000, guid: c01f8a4d77eed9643ba01050325466ee, type: 3}
+  - {fileID: 8300000, guid: fc091e987593d2e46961af0f1394c748, type: 3}
+  - {fileID: 8300000, guid: 0b18e56293d83194984ada6f80b62084, type: 3}
+  - {fileID: 8300000, guid: 2e978c14ae016aa41a64f03aaf2d8593, type: 3}
+  - {fileID: 8300000, guid: ecf27f163bf74614e979e4c2b595ef49, type: 3}
+  - {fileID: 8300000, guid: 96a53ce6bf6e0ba428505b0b09d804f0, type: 3}
+  - {fileID: 8300000, guid: 16646ae000ca4c046b13a8046a5a0963, type: 3}
+  _spookyGameplayMusic: {fileID: 8300000, guid: a59913d583f56ca4fa8922f12eb9d2b3, type: 3}

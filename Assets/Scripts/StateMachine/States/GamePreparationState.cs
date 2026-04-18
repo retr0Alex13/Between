@@ -8,6 +8,7 @@ namespace Between.StateMachines
     public class GamePreparationState : IState
     {
         private readonly GameObjectsData _gameObjectsData;
+        private readonly GameAudioData _gameAudioData;
         private readonly LevelRoot[] _levels;
         private readonly FirstPersonController _player;
         private readonly GameContext _gameContext;
@@ -16,10 +17,12 @@ namespace Between.StateMachines
         private LevelRoot _currentLevel;
         private FirstPersonController _playerInstance;
 
-        public GamePreparationState(StateMachine stateMachine, GameObjectsData gameObjectsData, GameContext gameContext)
+        public GamePreparationState(StateMachine stateMachine, GameObjectsData gameObjectsData, GameAudioData gameAudioData,
+            GameContext gameContext)
         {
             _stateMachine = stateMachine;
             _gameObjectsData = gameObjectsData;
+            _gameAudioData = gameAudioData;
             _gameContext = gameContext;
 
             _levels = _gameObjectsData.Levels;
@@ -61,7 +64,10 @@ namespace Between.StateMachines
 
                 player.enabled = true;
             }
-
+            if (_playerInstance.TryGetComponent(out FootstepPlayer playerFootsteps))
+            {
+                playerFootsteps.SetFootstepsAudio(_gameAudioData.FootstepAudioClips);
+            }
             _gameContext.CurrentLevelRoot = _currentLevel;
             _stateMachine.TransitionTo(_stateMachine.GameplayState);
         }

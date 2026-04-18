@@ -57,7 +57,6 @@ namespace Between.StateMachines
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
             _player.OnPlayerWalk += OnPlayerWalked;
 
-            //var isFirstTimePlay = PlayerPrefs.GetInt(Constants.FIRST_TIME_PLAYER_KEY, 1) == 1 ? true : false;
             InitializePlayerControls();
         }
 
