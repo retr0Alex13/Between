@@ -8,9 +8,12 @@ namespace Between
     {
         public event Action OnPlayerWalkedThrough;
 
+        [SerializeField]
+        private bool _isTutorial;
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out FirstPersonController player))
+            if (other.TryGetComponent(out FirstPersonController player) && !_isTutorial)
             {
                 OnPlayerWalkedThrough?.Invoke();
             }
