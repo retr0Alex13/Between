@@ -3,18 +3,23 @@ using System;
 
 public class MoveGhost : MonoBehaviour
 {
+    public enum EndBehavior { Loop, PingPong }
+
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _damping = 2f;
     [SerializeField] private float _arrivalDistance = 0.001f;
+    [SerializeField] private EndBehavior _endBehavior = EndBehavior.PingPong;
 
     private int _currentWaypointIndex = 0;
+    private int _direction = 1;
 
     private void Start()
     {
         if (_waypoints.Length > 0)
         {
             _currentWaypointIndex = 0;
+            _direction = 1;
         }
     }
 
@@ -48,12 +53,26 @@ public class MoveGhost : MonoBehaviour
 
     private void SetNextWaypoint()
     {
-        _currentWaypointIndex++;
-
-        if (_currentWaypointIndex >= _waypoints.Length)
+        switch (_endBehavior)
         {
-            Array.Reverse(_waypoints);
-            _currentWaypointIndex = 1;
+            case EndBehavior.Loop:
+                _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+                break;
+
+            case EndBehavior.PingPong:
+                _currentWaypointIndex += _direction;
+
+                if (_currentWaypointIndex >= _waypoints.Length)
+                {
+                    _direction = -1;
+                    _currentWaypointIndex = _waypoints.Length - 2;
+                }
+                else if (_currentWaypointIndex < 0)
+                {
+                    _direction = 1;
+                    _currentWaypointIndex = 1;
+                }
+                break;
         }
     }
 }
