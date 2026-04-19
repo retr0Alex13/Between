@@ -35,9 +35,8 @@ namespace Between.StateMachines
 
             if (currentLevelIndex > _levels.Length - 1)
             {
-                PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, 0);
-
-                currentLevelIndex = Random.Range(0, _levels.Length - 1);
+                currentLevelIndex = Random.Range(4, _levels.Length - 1);
+                PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, currentLevelIndex);
             }
 
             _currentLevel = Object.Instantiate(_levels[currentLevelIndex]);
