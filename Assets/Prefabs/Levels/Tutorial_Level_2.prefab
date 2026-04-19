@@ -645,7 +645,6 @@ MonoBehaviour:
   _playerSpawnPoint: {fileID: 4953055480183811977}
   _ghostObjects:
   - {fileID: 2071912145190788354}
-  - {fileID: 0}
   _levelFinish: {fileID: 2366084410920530451}
 --- !u!1 &5126741974522665129
 GameObject:
