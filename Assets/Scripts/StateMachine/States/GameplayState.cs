@@ -15,6 +15,7 @@ namespace Between.StateMachines
         private readonly ViewManager _viewManager;
         private readonly ViewPrefabsData _viewPrefabsData;
         private readonly GameConfigData _gameConfigData;
+        private readonly GameAudioData _gameAudioData;
 
         private LevelRoot _level;
         private FirstPersonController _player;
@@ -30,11 +31,12 @@ namespace Between.StateMachines
 
         private readonly int _alphaProperty = Shader.PropertyToID("Transparency_Intensity");
 
-        public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, ViewPrefabsData viewPrefabsData,
+        public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, GameAudioData gameAudioData, ViewPrefabsData viewPrefabsData,
             ViewManager viewManager, GameContext gameContext)
         {
             _stateMachine = stateMachine;
             _gameConfigData = gameConfigData;
+            _gameAudioData = gameAudioData;
             _viewManager = viewManager;
             _viewPrefabsData = viewPrefabsData;
             _gameContext = gameContext;
@@ -195,6 +197,8 @@ namespace Between.StateMachines
 
         private void RespwanPlayer()
         {
+            AudioManager.Instance.PlaySound(_gameAudioData.BoneCrack);
+
             CharacterController player = _gameContext.Player.GetComponent<CharacterController>();
 
             player.enabled = false;

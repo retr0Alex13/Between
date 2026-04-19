@@ -23,4 +23,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ecf27f163bf74614e979e4c2b595ef49, type: 3}
   - {fileID: 8300000, guid: 96a53ce6bf6e0ba428505b0b09d804f0, type: 3}
   - {fileID: 8300000, guid: 16646ae000ca4c046b13a8046a5a0963, type: 3}
+  _boneCrack: {fileID: 8300000, guid: 25ff1a519a3d6cb428ba47348c6fa7b6, type: 3}
   _spookyGameplayMusic: {fileID: 8300000, guid: a59913d583f56ca4fa8922f12eb9d2b3, type: 3}
