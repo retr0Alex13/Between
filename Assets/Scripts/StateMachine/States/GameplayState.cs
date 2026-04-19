@@ -197,6 +197,9 @@ namespace Between.StateMachines
 
         private void RespwanPlayer()
         {
+            PokiUnitySDK.Instance.gameplayStop();
+            _hasPokiGameplayStarted = false;
+
             AudioManager.Instance.PlaySound(_gameAudioData.BoneCrack);
 
             CharacterController player = _gameContext.Player.GetComponent<CharacterController>();
