@@ -54,6 +54,11 @@ namespace Between.StateMachines
             foreach (GhostObject ghostObject in _ghostObjects)
             {
                 ghostObject.OnPlayerWalkedThrough += RespwanPlayer;
+
+                if (ghostObject.TryGetComponent(out AudioSource ghostAudioSource))
+                {
+                    ghostAudioSource.Play();
+                }
             }
 
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
@@ -218,6 +223,7 @@ namespace Between.StateMachines
             PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, currentLevelIndex + 1);
 
             PokiUnitySDK.Instance.gameplayStop();
+            _hasPokiGameplayStarted = false;
             _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
         }
     }

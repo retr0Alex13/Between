@@ -12,12 +12,16 @@ namespace Between.Data
         [SerializeField]
         private AudioClip _boneCrack;
 
+        [SerializeField]
+        private AudioClip _ghostCry;
+
         [Header("Music")]
         [SerializeField]
         private AudioClip _spookyGameplayMusic;
 
         public AudioClip[] FootstepAudioClips => _footstepAudioClips;
         public AudioClip BoneCrack => _boneCrack;
+        public AudioClip GhostCry => _ghostCry;
         public AudioClip SpookyGameplayMusic => _spookyGameplayMusic;
     }
 }

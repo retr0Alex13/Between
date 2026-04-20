@@ -63,6 +63,13 @@ namespace Between.StateMachines
 
                 player.enabled = true;
             }
+            foreach (GhostObject ghostObject in _currentLevel.GhostObjects)
+            {
+                if (ghostObject.TryGetComponent(out AudioSource ghostAudioSource))
+                {
+                    ghostAudioSource.clip = _gameAudioData.GhostCry;
+                }
+            }
             if (_playerInstance.TryGetComponent(out FootstepPlayer playerFootsteps))
             {
                 playerFootsteps.SetFootstepsAudio(_gameAudioData.FootstepAudioClips);
