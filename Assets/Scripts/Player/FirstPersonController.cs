@@ -92,5 +92,11 @@ namespace Between.Player
         {
             return _playerMovement.CharacterController.velocity.magnitude;
         }
+
+        public void TogglePlayerFreeze(bool isFrozen)
+        {
+            _canMove = !isFrozen;
+            _canLook = !isFrozen;
+        }
     }
 }

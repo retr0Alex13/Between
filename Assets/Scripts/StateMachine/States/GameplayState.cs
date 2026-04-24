@@ -42,7 +42,7 @@ namespace Between.StateMachines
             _gameContext = gameContext;
         }
 
-        public void Enter()
+        public async Awaitable Enter()
         {
             _gameplayView = _viewManager.CreateView(_viewPrefabsData.GameplayView);
             _gameplayView.Show();
@@ -64,16 +64,18 @@ namespace Between.StateMachines
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
             _player.OnPlayerWalk += OnPlayerWalked;
 
+            await _gameplayView.FadeIn();
+
             InitializePlayerControls();
         }
+
 
         private void InitializePlayerControls()
         {
             _level.StartCoroutine(StartWaveEffect(true, false));
 
             Cursor.lockState = CursorLockMode.Locked;
-            _player.SetMoveAbility(true);
-            _player.SetLookAbility(true);
+            _player.TogglePlayerFreeze(false);
         }
 
         public void Execute()
@@ -202,6 +204,8 @@ namespace Between.StateMachines
 
         private void RespwanPlayer()
         {
+            _player.TogglePlayerFreeze(true);
+
             PokiUnitySDK.Instance.gameplayStop();
             _hasPokiGameplayStarted = false;
 
@@ -215,6 +219,9 @@ namespace Between.StateMachines
             _player.transform.rotation = _level.PlayerSpawnPoint.rotation;
 
             player.enabled = true;
+
+            InitializePlayerControls();
+            _gameplayView.FadeIn();
         }
 
         private void OnFinishReached()

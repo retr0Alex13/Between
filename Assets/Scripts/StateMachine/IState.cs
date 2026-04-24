@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace Between.StateMachines
 {
     public interface IState
     {
-        public void Enter()
+        public async Awaitable Enter()
         {
             // code that runs when we first enter the state
         }

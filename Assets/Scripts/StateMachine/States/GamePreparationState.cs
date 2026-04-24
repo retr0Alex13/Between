@@ -29,7 +29,7 @@ namespace Between.StateMachines
             _player = _gameObjectsData.PlayerPrefab;
         }
 
-        public void Enter()
+        public async Awaitable Enter()
         {
             int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
 
