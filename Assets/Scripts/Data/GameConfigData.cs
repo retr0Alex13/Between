@@ -15,7 +15,7 @@ namespace Between.Data
         private float _standingStillTime = 1f;
 
         public float WaveDelay => _waveDelay;
-        public float FadeDuration => _fadeDuration;
+        public float GhostObjectsFadeDuration => _fadeDuration;
         public float StandingStillTime => _standingStillTime;
     }
 }

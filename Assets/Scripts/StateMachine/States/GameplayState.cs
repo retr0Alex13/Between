@@ -189,10 +189,10 @@ namespace Between.StateMachines
             MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
             float elapsed = 0f;
 
-            while (elapsed < _gameConfigData.FadeDuration)
+            while (elapsed < _gameConfigData.GhostObjectsFadeDuration)
             {
                 elapsed += Time.deltaTime;
-                float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _gameConfigData.FadeDuration);
+                float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / _gameConfigData.GhostObjectsFadeDuration);
 
                 renderer.GetPropertyBlock(propBlock);
                 propBlock.SetFloat(_alphaProperty, currentAlpha);

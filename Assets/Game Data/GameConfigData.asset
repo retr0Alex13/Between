@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c3012cb2ae40741908255eb4a618e3, type: 3}
   m_Name: GameConfigData
   m_EditorClassIdentifier: Assembly-CSharp::Between.Data.GameConfigData
-  _waveDelay: 0.1
+  _waveDelay: 0.05
   _fadeDuration: 0.5
-  _standingStillTime: 1
+  _standingStillTime: 0.5
