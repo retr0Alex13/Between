@@ -3,6 +3,8 @@ using Between.Data;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 [InitializeOnLoad]
 public class MenuBarTools
 {
@@ -137,3 +139,4 @@ public class LevelSelectorWindow : EditorWindow
         Repaint();
     }
 }
+#endif
