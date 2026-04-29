@@ -20,9 +20,11 @@ namespace Between.StateMachines
         private LevelRoot _level;
         private FirstPersonController _player;
         private GhostObject[] _ghostObjects;
+        private ScenePostProcessings _sceneVolumes;
 
         private GameplayView _gameplayView;
         private Coroutine _fadeOutCoroutine;
+        private Coroutine _vignetteCoroutine;
 
         private bool _isStandingStill = false;
         private float _timer;
@@ -44,6 +46,7 @@ namespace Between.StateMachines
 
         public async Awaitable Enter()
         {
+            _sceneVolumes = Object.FindAnyObjectByType<ScenePostProcessings>();
             _gameplayView = _viewManager.CreateView(_viewPrefabsData.GameplayView);
             _gameplayView.Show();
 
@@ -137,6 +140,8 @@ namespace Between.StateMachines
                     _level.StartCoroutine(StartWaveEffect(true, true));
                     _isStandingStill = true;
                     _timer = 0f;
+
+                    StartVignetteCrossfade(0f, 1f);
                 }
             }
             else if (_player.GetPlayerVelocity() > 1f)
@@ -146,11 +151,48 @@ namespace Between.StateMachines
 
                 _gameplayView.SetEyeFillAmount(1f);
 
+                StartVignetteCrossfade(1f, 0f);
+
                 if (_fadeOutCoroutine != null)
                     return;
 
                 _fadeOutCoroutine = _level.StartCoroutine(StartWaveEffect(true, false));
             }
+        }
+
+        private void StartVignetteCrossfade(float targetOriginal, float targetStanding)
+        {
+            if (_vignetteCoroutine != null)
+            {
+                _level.StopCoroutine(_vignetteCoroutine);
+                _vignetteCoroutine = null;
+            }
+
+            _vignetteCoroutine = _level.StartCoroutine(CrossfadeVignette(targetOriginal, targetStanding));
+        }
+
+        private IEnumerator CrossfadeVignette(float targetOriginal, float targetStanding)
+        {
+            float elapsed = 0f;
+            float duration = _gameConfigData.StandingStillTime;
+
+            float startOriginal = _sceneVolumes.OriginalVolume.weight;
+            float startStanding = _sceneVolumes.StandingStillVolume.weight;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+
+                _sceneVolumes.OriginalVolume.weight = Mathf.Lerp(startOriginal, targetOriginal, t);
+                _sceneVolumes.StandingStillVolume.weight = Mathf.Lerp(startStanding, targetStanding, t);
+
+                yield return null;
+            }
+
+            _sceneVolumes.OriginalVolume.weight = targetOriginal;
+            _sceneVolumes.StandingStillVolume.weight = targetStanding;
+            _vignetteCoroutine = null;
         }
 
         private IEnumerator StartWaveEffect(bool fromNearest, bool makeVisible)
