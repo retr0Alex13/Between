@@ -13,8 +13,12 @@ namespace Between.Level
         [SerializeField]
         private LevelFinishTrigger _levelFinish;
 
+        [SerializeField]
+        private Outline _finishLamp;
+
         public GhostObject[] GhostObjects => _ghostObjects;
         public Transform PlayerSpawnPoint => _playerSpawnPoint;
         public LevelFinishTrigger LevelFinish => _levelFinish;
+        public Outline FinishLamp => _finishLamp;
     }
 }

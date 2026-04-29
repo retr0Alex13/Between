@@ -603,6 +603,7 @@ MonoBehaviour:
   _playerSpawnPoint: {fileID: 4953055480183811977}
   _ghostObjects: []
   _levelFinish: {fileID: 2366084410920530451}
+  _finishLamp: {fileID: 9042429529771559420}
 --- !u!1 &5126741974522665129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1455,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1592365562418485470}
     m_Modifications:
+    - target: {fileID: 3049431330778117929, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
+      propertyPath: outlineMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049431330778117929, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
+      propertyPath: outlineWidth
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4896897587945272537, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5000001
@@ -1516,39 +1525,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4896897587945272537, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1858436526657843786}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4896897587945564409, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6651868324327938729}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
 --- !u!4 &1502423769707268620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896897587945272537, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
   m_PrefabInstance: {fileID: 6281650787658546901}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1502423769707632172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4896897587945564409, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
+--- !u!114 &9042429529771559420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3049431330778117929, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
   m_PrefabInstance: {fileID: 6281650787658546901}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6651868324327938729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502423769707632172}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 0.03756249, g: 1, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  m_EditorClassIdentifier: Core::Outline
 --- !u!1001 &6283698047847429899
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ namespace Between.StateMachines
         private GameplayView _gameplayView;
         private Coroutine _fadeOutCoroutine;
         private Coroutine _vignetteCoroutine;
+        private Coroutine _outlineCoroutine;
 
         private bool _isStandingStill = false;
         private float _timer;
@@ -75,7 +76,7 @@ namespace Between.StateMachines
 
         private void InitializePlayerControls()
         {
-            _level.StartCoroutine(StartWaveEffect(true, false));
+            _level.StartCoroutine(StartWaveEffect(true, true));
 
             Cursor.lockState = CursorLockMode.Locked;
             _player.TogglePlayerFreeze(false);
@@ -142,16 +143,21 @@ namespace Between.StateMachines
                     _timer = 0f;
 
                     StartVignetteCrossfade(0f, 1f);
+                    StartOutlineFade(0f, 2f);
                 }
             }
             else if (_player.GetPlayerVelocity() > 1f)
             {
+                if (_isStandingStill)
+                {
+                    StartVignetteCrossfade(1f, 0f);
+                    StartOutlineFade(2f, 0f);
+                }
+
                 _isStandingStill = false;
                 _timer = 0f;
 
                 _gameplayView.SetEyeFillAmount(1f);
-
-                StartVignetteCrossfade(1f, 0f);
 
                 if (_fadeOutCoroutine != null)
                     return;
@@ -169,6 +175,43 @@ namespace Between.StateMachines
             }
 
             _vignetteCoroutine = _level.StartCoroutine(CrossfadeVignette(targetOriginal, targetStanding));
+        }
+
+        private void StartOutlineFade(float startWidth, float targetWidth)
+        {
+            if (_outlineCoroutine != null)
+            {
+                _level.StopCoroutine(_outlineCoroutine);
+                _outlineCoroutine = null;
+            }
+            _outlineCoroutine = _level.StartCoroutine(OutlineFade(startWidth, targetWidth));
+        }
+
+        private IEnumerator OutlineFade(float startWidth, float targetWidth)
+        {
+            float elapsed = 0f;
+            float duration = _gameConfigData.StandingStillTime;
+
+            if (targetWidth > 0)
+            {
+                _level.FinishLamp.OutlineMode = Outline.Mode.OutlineAll;
+                _level.FinishLamp.OutlineWidth = startWidth;
+            }
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                _level.FinishLamp.OutlineWidth = Mathf.Lerp(startWidth, targetWidth, t);
+                yield return null;
+            }
+
+            _level.FinishLamp.OutlineWidth = targetWidth;
+            _level.FinishLamp.OutlineMode = targetWidth > 0
+                ? Outline.Mode.OutlineAll
+                : Outline.Mode.OutlineHidden;
+
+            _outlineCoroutine = null;
         }
 
         private IEnumerator CrossfadeVignette(float targetOriginal, float targetStanding)

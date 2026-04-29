@@ -751,6 +751,7 @@ MonoBehaviour:
   - {fileID: 4566586096146471173}
   - {fileID: 6988104158832327493}
   _levelFinish: {fileID: 2366084410920530451}
+  _finishLamp: {fileID: 9042429529771559420}
 --- !u!1 &5710178891093051648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5064,6 +5065,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4896897587945272537, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
   m_PrefabInstance: {fileID: 6281650787658546901}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9042429529771559420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3049431330778117929, guid: 6007974874f63aa4bb49b3657a0a3898, type: 3}
+  m_PrefabInstance: {fileID: 6281650787658546901}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Outline
 --- !u!1001 &6296395582613303435
 PrefabInstance:
   m_ObjectHideFlags: 0
