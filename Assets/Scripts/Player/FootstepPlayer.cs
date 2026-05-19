@@ -34,7 +34,7 @@ namespace Between.Player
 
         private void OnPlayerStop()
         {
-            Debug.Log("Player Stopped");
+
         }
 
         public void SetFootstepsAudio(AudioClip[] footstepsClips)

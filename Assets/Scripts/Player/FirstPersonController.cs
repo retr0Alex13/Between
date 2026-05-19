@@ -48,7 +48,13 @@ namespace Between.Player
                 _playerMovement.Move(_input.MoveInput.x, _input.MoveInput.y);
             }
 
-            bool isCurrentlyMoving = GetPlayerVelocity() >= 0.1f;
+            Vector3 controllerVelocity = _playerMovement.CharacterController.velocity;
+            controllerVelocity.y = 0f;
+            float horizontalSpeed = controllerVelocity.magnitude;
+
+            bool hasInput = _input.MoveInput.sqrMagnitude > 0.0001f;
+
+            bool isCurrentlyMoving = horizontalSpeed >= 0.1f && hasInput;
 
             if (isCurrentlyMoving)
             {
