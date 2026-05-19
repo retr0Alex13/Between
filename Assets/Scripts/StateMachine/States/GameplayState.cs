@@ -305,7 +305,11 @@ namespace Between.StateMachines
 
             player.enabled = true;
 
-            InitializePlayerControls();
+            StartWaveEffect(true, false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            _player.TogglePlayerFreeze(false);
+
             _gameplayView.FadeIn();
         }
 
