@@ -2,6 +2,7 @@ using Between.Data;
 using Between.Level;
 using Between.View;
 using System;
+using System.Collections.Generic;
 
 namespace Between.StateMachines
 {
@@ -10,12 +11,15 @@ namespace Between.StateMachines
     {
         public GamePreparationState GamePreparationState => _gamePreparationState;
         public GameplayState GameplayState => _gameplayState;
+        public PauseState PauseState => _pauseState;
 
         public IState CurrentState { get; private set; }
 
         private readonly GamePreparationState _gamePreparationState;
         private readonly GameplayState _gameplayState;
+        private readonly PauseState _pauseState;
 
+        private readonly Stack<IState> _overlayStack = new Stack<IState>();
         private readonly GameContext _gameContext;
 
         public event Action<IState> stateChanged;
@@ -27,6 +31,7 @@ namespace Between.StateMachines
 
             _gamePreparationState = new GamePreparationState(this, gameObjectsData, gameAudioData, _gameContext);
             _gameplayState = new GameplayState(this, gameConfigData, gameAudioData, viewPrefabsData, viewManager, _gameContext);
+            _pauseState = new PauseState(this, viewPrefabsData, viewManager, gameAudioData);
         }
 
         public void Initialize(IState state)
@@ -52,6 +57,23 @@ namespace Between.StateMachines
             {
                 CurrentState.Execute();
             }
+        }
+
+        public void PushOverlay(IState overlay)
+        {
+            _overlayStack.Push(CurrentState); 
+            CurrentState = overlay;
+            overlay.Enter();
+            stateChanged?.Invoke(overlay);
+        }
+
+        public void PopOverlay()
+        {
+            if (_overlayStack.Count == 0) return;
+
+            CurrentState.Exit();               
+            CurrentState = _overlayStack.Pop();
+            stateChanged?.Invoke(CurrentState);
         }
     }
 }

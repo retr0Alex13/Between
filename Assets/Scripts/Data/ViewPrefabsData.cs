@@ -9,6 +9,10 @@ namespace Between.Data
         [SerializeField]
         private GameplayView _gameplayView;
 
+        [SerializeField]
+        private PauseView _pauseView;
+
         public GameplayView GameplayView => _gameplayView;
+        public PauseView PauseView => _pauseView;
     }
 }

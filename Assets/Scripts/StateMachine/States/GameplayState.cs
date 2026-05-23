@@ -5,6 +5,7 @@ using Between.View;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Between.StateMachines
 {
@@ -84,6 +85,11 @@ namespace Between.StateMachines
 
         public void Execute()
         {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                _stateMachine.PushOverlay(_stateMachine.PauseState);
+                return;
+            }
             SetupGhostVision();
         }
 

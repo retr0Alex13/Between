@@ -22,6 +22,9 @@ namespace Between.Player
 
         public void Look(float inputX, float inputY)
         {
+            if (Time.deltaTime == 0)
+                return;
+
             float mouseX = inputX * _mouseSensitivity;
             float mouseY = inputY * _mouseSensitivity;
 

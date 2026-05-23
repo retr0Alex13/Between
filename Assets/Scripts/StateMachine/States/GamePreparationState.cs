@@ -74,6 +74,16 @@ namespace Between.StateMachines
             {
                 playerFootsteps.SetFootstepsAudio(_gameAudioData.FootstepAudioClips);
             }
+
+            bool isMusicEnabled = PlayerPrefs.GetInt(Constants.MUSIC_SETTING_KEY, 1) == 1;
+            bool isSoundEnabled = PlayerPrefs.GetInt(Constants.SOUND_SETTING_KEY, 1) == 1;
+
+            AudioListener.volume = isSoundEnabled ? 1 : 0;
+            if (!isMusicEnabled)
+            {
+                AudioManager.Instance.StopMusic();
+            }
+
             _gameContext.CurrentLevelRoot = _currentLevel;
             _stateMachine.TransitionTo(_stateMachine.GameplayState);
         }

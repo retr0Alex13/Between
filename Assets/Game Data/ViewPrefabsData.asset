@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ViewPrefabsData
   m_EditorClassIdentifier: Assembly-CSharp::Between.Data.ViewPrefabsData
   _gameplayView: {fileID: 1723703737310170120, guid: 6438d13c767dbcf4c8eade755dd8e415, type: 3}
+  _pauseView: {fileID: 2201929646881082770, guid: 67113762c0507b247a25fa6c771c8d1a, type: 3}
