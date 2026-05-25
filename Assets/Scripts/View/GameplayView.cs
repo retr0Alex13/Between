@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,11 @@ namespace Between.View
 {
     public class GameplayView : BaseView
     {
+        public event Action OnPauseButton;
+
+        [SerializeField]
+        private Button _pauseButton;
+
         [SerializeField]
         private Image _closedEye;
 
@@ -19,6 +25,12 @@ namespace Between.View
         private void Awake()
         {
             _canvasGroup = _blackScreen.GetComponent<CanvasGroup>();
+            _pauseButton.onClick.AddListener(OnPauseButtonClicked);
+        }
+
+        private void OnDestroy()
+        {
+            _pauseButton.onClick.RemoveAllListeners();
         }
 
         public void SetEyeFillAmount(float amount)
@@ -34,6 +46,16 @@ namespace Between.View
                 _canvasGroup.alpha -= _blackScreenFadeSpeed * Time.deltaTime;
                 await Awaitable.NextFrameAsync();
             }
+        }
+
+        public void OnPauseButtonClicked()
+        {
+            OnPauseButton?.Invoke();
+        }
+
+        public void SetPauseButtonInteractable(bool isInteractable)
+        {
+            _pauseButton.interactable = isInteractable;
         }
     }
 }

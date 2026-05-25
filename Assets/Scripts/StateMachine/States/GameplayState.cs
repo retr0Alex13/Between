@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.CullingGroup;
 
 namespace Between.StateMachines
 {
@@ -50,6 +51,9 @@ namespace Between.StateMachines
         {
             _sceneVolumes = Object.FindAnyObjectByType<ScenePostProcessings>();
             _gameplayView = _viewManager.CreateView(_viewPrefabsData.GameplayView);
+            _gameplayView.OnPauseButton += OnPauseClickedHandler;
+            _stateMachine.stateChanged += OnStateChanged;
+            _gameplayView.SetPauseButtonInteractable(true);
             _gameplayView.Show();
 
             _level = _gameContext.CurrentLevelRoot;
@@ -68,6 +72,7 @@ namespace Between.StateMachines
 
             _level.LevelFinish.OnPlayerReachedFinish += OnFinishReached;
             _player.OnPlayerWalk += OnPlayerWalked;
+            _player.OnPausePressed += OnPauseClickedHandler;
 
             await _gameplayView.FadeIn();
 
@@ -85,18 +90,16 @@ namespace Between.StateMachines
 
         public void Execute()
         {
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                _stateMachine.PushOverlay(_stateMachine.PauseState);
-                return;
-            }
             SetupGhostVision();
         }
 
         public void Exit()
         {
+            _gameplayView.OnPauseButton -= OnPauseClickedHandler;
+            _stateMachine.stateChanged -= OnStateChanged;
             _level.LevelFinish.OnPlayerReachedFinish -= OnFinishReached;
             _player.OnPlayerWalk -= OnPlayerWalked;
+            _player.OnPausePressed -= OnPauseClickedHandler;
 
             _player.SetMoveAbility(false);
             _player.SetLookAbility(false);
@@ -327,6 +330,27 @@ namespace Between.StateMachines
             PokiUnitySDK.Instance.gameplayStop();
             _hasPokiGameplayStarted = false;
             _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
+        }
+
+        private void OnStateChanged(IState state)
+        {
+            if (state == _stateMachine.GameplayState)
+            {
+                _gameplayView.SetPauseButtonInteractable(true);
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
+        private void OnPauseClickedHandler()
+        {
+            if (_stateMachine.CurrentState == _stateMachine.PauseState)
+            {
+                _stateMachine.PopOverlay();
+                return;
+            }
+
+            _gameplayView.SetPauseButtonInteractable(false);
+            _stateMachine.PushOverlay(_stateMachine.PauseState);
         }
     }
 }

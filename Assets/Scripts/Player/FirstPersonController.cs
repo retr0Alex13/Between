@@ -8,6 +8,7 @@ namespace Between.Player
     {
         public event Action OnPlayerWalk;
         public event Action OnPlayerStop;
+        public event Action OnPausePressed;
 
         [SerializeField]
         private bool _canMove = true;
@@ -32,6 +33,7 @@ namespace Between.Player
         {
             _input = GetComponent<InputReader>();
             _input.JumpEvent += _playerMovement.HandleJump;
+            _input.PauseEvent += OnPauseButtonPressed;
         }
 
         private void Start()
@@ -103,6 +105,11 @@ namespace Between.Player
         {
             _canMove = !isFrozen;
             _canLook = !isFrozen;
+        }
+
+        public void OnPauseButtonPressed()
+        {
+            OnPausePressed?.Invoke();
         }
     }
 }

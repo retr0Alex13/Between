@@ -10,6 +10,7 @@ namespace Between.Inputs
         public Vector2 MoveInput => _moveInput;
 
         public event Action JumpEvent;
+        public event Action PauseEvent;
 
         private Vector2 _lookInput;
         private Vector2 _moveInput;
@@ -22,6 +23,7 @@ namespace Between.Inputs
             _inputs.Enable();
 
             _inputs.Player.Jump.performed += OnJumpButtonPressed;
+            _inputs.Player.Pause.performed += OnPauseButtonPressed;
         }
 
         private void Update()
@@ -35,9 +37,15 @@ namespace Between.Inputs
             JumpEvent?.Invoke();
         }
 
+        private void OnPauseButtonPressed(InputAction.CallbackContext context)
+        {
+            PauseEvent?.Invoke();
+        }
+
         private void OnDisable()
         {
             _inputs.Player.Jump.performed -= OnJumpButtonPressed;
+            _inputs.Player.Pause.performed -= OnPauseButtonPressed;
 
             _inputs.Disable();
         }
