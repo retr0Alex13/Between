@@ -32,8 +32,6 @@ namespace Between.StateMachines
         private bool _isStandingStill = false;
         private float _timer;
 
-        private bool _hasPokiGameplayStarted;
-
         private readonly int _alphaProperty = Shader.PropertyToID("Transparency_Intensity");
 
         public GameplayState(StateMachine stateMachine, GameConfigData gameConfigData, GameAudioData gameAudioData, ViewPrefabsData viewPrefabsData,
@@ -117,11 +115,7 @@ namespace Between.StateMachines
 
         private void OnPlayerWalked()
         {
-            if (!_hasPokiGameplayStarted)
-            {
-                PokiUnitySDK.Instance.gameplayStart();
-                _hasPokiGameplayStarted = true;
-            }
+
         }
 
         private void SetupGhostVision()
@@ -300,9 +294,6 @@ namespace Between.StateMachines
         {
             _player.TogglePlayerFreeze(true);
 
-            PokiUnitySDK.Instance.gameplayStop();
-            _hasPokiGameplayStarted = false;
-
             AudioManager.Instance.PlaySound(_gameAudioData.BoneCrack);
 
             CharacterController player = _gameContext.Player.GetComponent<CharacterController>();
@@ -327,8 +318,6 @@ namespace Between.StateMachines
             int currentLevelIndex = PlayerPrefs.GetInt(Constants.CURRENT_LEVEL_KEY, 0);
             PlayerPrefs.SetInt(Constants.CURRENT_LEVEL_KEY, currentLevelIndex + 1);
 
-            PokiUnitySDK.Instance.gameplayStop();
-            _hasPokiGameplayStarted = false;
             _stateMachine.TransitionTo(_stateMachine.GamePreparationState);
         }
 
